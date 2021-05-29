@@ -39,6 +39,9 @@ func _physics_process(_delta):
 
 func _on_EnemyArea_body_entered(body):
 	if "Bullet" in body.name:
+		var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("DamageAudioStreamPlayer")
+		if !audioPlayer.is_playing():
+			audioPlayer.play()
 		lives -= 1
 		var scoreText = get_tree().get_root().get_node("Level_1/ScoreText")
 		var score = int(scoreText.get_text())

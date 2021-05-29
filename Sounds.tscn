@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sounds/sfx_sounds_powerup17.wav" type="AudioStream" id=1]
 [ext_resource path="res://Sounds/sfx_exp_medium3.wav" type="AudioStream" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Sounds/sfx_movement_jump12.wav" type="AudioStream" id=4]
 [ext_resource path="res://Sounds/sfx_wpn_laser7.wav" type="AudioStream" id=5]
 [ext_resource path="res://Sounds/sfx_movement_portal3.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/sfx_damage_hit10.wav" type="AudioStream" id=7]
 
 [node name="Sounds" type="Node2D"]
 
@@ -32,3 +33,7 @@ pitch_scale = 1.81
 [node name="PowerUpAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = 4.039
+
+[node name="DamageAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 8.078
