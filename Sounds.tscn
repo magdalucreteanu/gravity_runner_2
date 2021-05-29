@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Sounds/sfx_sounds_powerup17.wav" type="AudioStream" id=1]
 [ext_resource path="res://Sounds/sfx_exp_medium3.wav" type="AudioStream" id=2]
-[ext_resource path="res://Sounds/sfx_deathscream_human1.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sounds/sfx_deathscream_robot3.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sounds/sfx_movement_jump12.wav" type="AudioStream" id=4]
 [ext_resource path="res://Sounds/sfx_wpn_laser7.wav" type="AudioStream" id=5]
 
@@ -26,3 +26,4 @@ stream = ExtResource( 4 )
 [node name="DeathAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = 16.156
+pitch_scale = 1.81

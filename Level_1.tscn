@@ -68,21 +68,6 @@ position = Vector2( 365.265, 238.563 )
 
 [node name="EnemyList" type="Node2D" parent="."]
 
-[node name="Enemy_1" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 795.67, 229.981 )
-
-[node name="Enemy_2" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 1573.67, 93.981 )
-
-[node name="Enemy_3" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 1165.67, 107.981 )
-
-[node name="Enemy_4" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 3040.67, 46.981 )
-
-[node name="Enemy_5" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 1843.67, 104.981 )
-
 [node name="Enemy_6" parent="EnemyList" instance=ExtResource( 5 )]
 position = Vector2( 2274.67, 81.981 )
 

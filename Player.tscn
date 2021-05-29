@@ -1,10 +1,39 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Asimov (1).png" type="Texture" id=2]
+[ext_resource path="res://Sprites/RobotFree/png/Run (2).png" type="Texture" id=2]
 [ext_resource path="res://Bullet.gd" type="Script" id=3]
 [ext_resource path="res://PhysicsHelper.gd" type="Script" id=4]
 [ext_resource path="res://Sounds/Juhani Junkala [Retro Game Music Pack] Level 1.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sprites/RobotFree/png/Run (1).png" type="Texture" id=6]
+[ext_resource path="res://Sprites/RobotFree/png/Run (3).png" type="Texture" id=7]
+[ext_resource path="res://Sprites/RobotFree/png/Run (5).png" type="Texture" id=8]
+[ext_resource path="res://Sprites/RobotFree/png/Run (6).png" type="Texture" id=9]
+[ext_resource path="res://Sprites/RobotFree/png/Run (8).png" type="Texture" id=10]
+[ext_resource path="res://Sprites/RobotFree/png/Run (7).png" type="Texture" id=11]
+[ext_resource path="res://Sprites/RobotFree/png/Run (4).png" type="Texture" id=12]
+[ext_resource path="res://Sprites/RobotFree/png/Idle (9).png" type="Texture" id=13]
+[ext_resource path="res://Sprites/RobotFree/png/Idle (4).png" type="Texture" id=14]
+[ext_resource path="res://Sprites/RobotFree/png/Idle (8).png" type="Texture" id=15]
+[ext_resource path="res://Sprites/RobotFree/png/Idle (1).png" type="Texture" id=16]
+[ext_resource path="res://Sprites/RobotFree/png/Idle (5).png" type="Texture" id=17]
+[ext_resource path="res://Sprites/RobotFree/png/Idle (7).png" type="Texture" id=18]
+[ext_resource path="res://Sprites/RobotFree/png/Idle (6).png" type="Texture" id=19]
+[ext_resource path="res://Sprites/RobotFree/png/Idle (2).png" type="Texture" id=20]
+[ext_resource path="res://Sprites/RobotFree/png/Idle (3).png" type="Texture" id=21]
+[ext_resource path="res://Sprites/RobotFree/png/RunShoot (1).png" type="Texture" id=22]
+[ext_resource path="res://Sprites/RobotFree/png/RunShoot (8).png" type="Texture" id=23]
+[ext_resource path="res://Sprites/RobotFree/png/RunShoot (2).png" type="Texture" id=24]
+[ext_resource path="res://Sprites/RobotFree/png/RunShoot (7).png" type="Texture" id=25]
+[ext_resource path="res://Sprites/RobotFree/png/RunShoot (3).png" type="Texture" id=26]
+[ext_resource path="res://Sprites/RobotFree/png/RunShoot (9).png" type="Texture" id=27]
+[ext_resource path="res://Sprites/RobotFree/png/RunShoot (4).png" type="Texture" id=28]
+[ext_resource path="res://Sprites/RobotFree/png/RunShoot (6).png" type="Texture" id=29]
+[ext_resource path="res://Sprites/RobotFree/png/RunShoot (5).png" type="Texture" id=30]
+[ext_resource path="res://Sprites/RobotFree/png/Shoot (2).png" type="Texture" id=31]
+[ext_resource path="res://Sprites/RobotFree/png/Shoot (1).png" type="Texture" id=32]
+[ext_resource path="res://Sprites/RobotFree/png/Shoot (4).png" type="Texture" id=33]
+[ext_resource path="res://Sprites/RobotFree/png/Shoot (3).png" type="Texture" id=34]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21.0458, 36.9363 )
@@ -17,6 +46,29 @@ radius = 19.7887
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 18.2158, 10 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 16 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 14 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 15 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 24 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 30 ), ExtResource( 23 ), ExtResource( 27 ) ],
+"loop": true,
+"name": "run_shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 32 ), ExtResource( 31 ), ExtResource( 34 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "idle_shoot",
+"speed": 5.0
+} ]
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 1.5, 1.5 )
@@ -33,10 +85,6 @@ __meta__ = {
 position = Vector2( -1.33333, 6 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -3, 0 )
-texture = ExtResource( 2 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1.66667, 4 )
 shape = SubResource( 2 )
@@ -44,8 +92,6 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 21.3333 )
 shape = SubResource( 3 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -56,14 +102,14 @@ limit_bottom = 0
 smoothing_enabled = true
 smoothing_speed = 7.0
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="BulletKinematicBody2D" type="KinematicBody2D" parent="."]
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletKinematicBody2D"]
 shape = SubResource( 4 )
 disabled = true
 
-[node name="BulletPoint" type="Node2D" parent="KinematicBody2D"]
+[node name="BulletPoint" type="Node2D" parent="BulletKinematicBody2D"]
 position = Vector2( 35, 0 )
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -72,5 +118,10 @@ script = ExtResource( 4 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 autoplay = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.133333, 0.133333 )
+frames = SubResource( 5 )
+animation = "death"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

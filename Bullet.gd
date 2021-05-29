@@ -1,18 +1,31 @@
 extends KinematicBody2D
 
+# Bullet variables
 const bullet_speed = 2000
 var reload_time_bullet = 0
 const bullet = preload("res://Bullet.tscn")
 
+# Bomb variables
 const bomb_speed = 5
 var reload_time_bomb = 0
 const bomb = preload("res://Bomb.tscn")
 
+var _animated_sprite
+
+# Run shoot animation timer 
+var run_shoot_timer = 0
+
+func _ready():
+	_animated_sprite = get_tree().get_root().get_node("Level_1/Player").get_node("AnimatedSprite")
+
 func _process(delta: float) -> void:
 	reload_time_bullet -= delta
+	run_shoot_timer -= delta
+	
 	if Input.is_action_pressed("left_mouse_button") and reload_time_bullet < 0:
 		reload_time_bullet = 0.3
-		fire()
+		run_shoot_timer = 0.5
+		fire_bullet()
 	
 	var bombLabel = get_tree().get_root().get_node("Level_1/BombLabel")
 	reload_time_bomb -= delta
@@ -33,12 +46,14 @@ func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
 	
 
-func fire():
+func fire_bullet():
 	var bullet_instance = bullet.instance()
 	bullet_instance.position = $BulletPoint.get_global_position()
 	bullet_instance.rotation_degrees = rotation_degrees
 	bullet_instance.apply_impulse(Vector2(),Vector2(bullet_speed, 0).rotated(rotation))
 	get_tree().get_root().call_deferred("add_child", bullet_instance)
+	# Run Shoot animation
+	_animated_sprite.play("run_shoot")
 	# Bullet Sound
 	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("BulletAudioStreamPlayer")
 	if !audioPlayer.is_playing():
