@@ -16,7 +16,7 @@ var _animated_sprite
 var run_shoot_timer = 0
 
 func _ready():
-	_animated_sprite = get_tree().get_root().get_node("Level_1/Player").get_node("AnimatedSprite")
+	_animated_sprite = get_tree().get_root().get_node("Level_1/Player").get_node("PlayerAnimatedSprite")
 
 func _process(delta: float) -> void:
 	reload_time_bullet -= delta

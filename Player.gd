@@ -9,21 +9,20 @@ const MAX_FALL_SPEED = 1000
 # Animation
 onready var anim_player = $AnimationPlayer
 onready var sprite = $Sprite
-onready var _animated_sprite = $AnimatedSprite
+onready var _animated_sprite = $PlayerAnimatedSprite
+onready var _powerup_animated_sprite = $PowerUpAnimatedSprite
  
 var y_velo = 0
 var facing_right = true
 
-var dead = false
-
 func _ready():
+	_powerup_animated_sprite.visible = false
 #	var tilemap_rect = get_parent().get_node("TileMap").get_used_rect()
 #	var tilemap_cell_size = get_parent().get_node("TileMap").cell_size 
 #	$Camera2D.limit_left = tilemap_rect.postition.x * tilemap_cell_size.x
 #	$Camera2D.limit_right = tilemap_rect.end.x * tilemap_cell_size.x
 #	$Camera2D.limit_top = tilemap_rect.postition.y * tilemap_cell_size.y
 #	$Camera2D.limit_bottom = tilemap_rect.end.y * tilemap_cell_size.y
-	pass 
 
 
 func _physics_process(_delta):		
@@ -38,9 +37,6 @@ func _physics_process(_delta):
 	
 	var run_shoot_timer = get_node("BulletKinematicBody2D").get("run_shoot_timer")
 	
-	if dead:
-		return
-		
 	var move_dir = 0
 	if Input.is_action_pressed("move_right"):
 		move_dir += 1
@@ -102,7 +98,21 @@ func death():
 	yield(get_tree().create_timer(0.5), 'timeout')
 	get_tree().reload_current_scene()
 
+func power_up():
+	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("PowerUpAudioStreamPlayer")
+	if !audioPlayer.is_playing():
+		audioPlayer.play()
+	_powerup_animated_sprite.visible = true
+	_powerup_animated_sprite.play("lightning")
+	
 func _on_Area2D_body_entered(body):
 	#if "Enemy_1" in body.name or "Enemy_2" in body.name:
 	if body.name.begins_with("Enemy"):
-		death()
+		if _powerup_animated_sprite.visible:
+			body.queue_free()
+			_powerup_animated_sprite.stop()
+			_powerup_animated_sprite.visible = false
+		else:
+			death()
+	elif body.name.begins_with("Power"):
+		power_up()
