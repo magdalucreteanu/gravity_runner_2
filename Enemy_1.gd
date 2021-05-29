@@ -49,7 +49,7 @@ func _on_EnemyArea_body_entered(body):
 		scoreText.set_text(str(score))
 		if (lives == 0):
 			queue_free()
-	if "GravityArea" in body.name:
+	if "Bomb" in body.name:
 		is_hit = true
 		var scoreText = get_tree().get_root().get_node("Level_1/ScoreText")
 		var score = int(scoreText.get_text())

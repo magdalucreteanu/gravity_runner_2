@@ -70,13 +70,13 @@ position = Vector2( 365.265, 238.563 )
 [node name="EnemyList" type="Node2D" parent="."]
 
 [node name="Enemy_6" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 2183.77, 124.177 )
+position = Vector2( 1510.25, 99.2319 )
 
 [node name="Enemy_7" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 2586.67, 63.981 )
+position = Vector2( 2137.66, 42.5995 )
 
 [node name="Enemy_8" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 2868.67, 70.981 )
+position = Vector2( 2761.76, 42.4723 )
 
 [node name="ScoreLabel" type="RichTextLabel" parent="."]
 margin_left = 120.0

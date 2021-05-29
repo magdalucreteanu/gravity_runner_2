@@ -4,9 +4,9 @@ const G_Area = preload("res://GravityArea.tscn")
 
 func _on_Bomb_body_entered(body):
 	if !body.is_in_group("Player"):
-		var G_Area_instance = G_Area.instance()
-		G_Area_instance.position = body.position
-		get_tree().get_root().call_deferred("add_child", G_Area_instance)
+	#	var G_Area_instance = G_Area.instance()
+	#	G_Area_instance.position = body.position
+	#	get_tree().get_root().call_deferred("add_child", G_Area_instance)
 		queue_free()
 		
 #func launch(target_position):

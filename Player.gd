@@ -109,6 +109,9 @@ func _on_Area2D_body_entered(body):
 	#if "Enemy_1" in body.name or "Enemy_2" in body.name:
 	if body.name.begins_with("Enemy"):
 		if _powerup_animated_sprite.visible:
+			var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("EnemyDeathAudioStreamPlayer")
+			if !audioPlayer.is_playing():
+				audioPlayer.play()
 			body.queue_free()
 			_powerup_animated_sprite.stop()
 			_powerup_animated_sprite.visible = false

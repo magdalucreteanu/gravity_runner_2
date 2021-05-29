@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_exp_medium8.wav-5a4a3078f9fa2ec0198696ce271bbc5b.sample"
+
+[deps]
+
+source_file="res://Sounds/sfx_exp_medium8.wav"
+dest_files=[ "res://.import/sfx_exp_medium8.wav-5a4a3078f9fa2ec0198696ce271bbc5b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
