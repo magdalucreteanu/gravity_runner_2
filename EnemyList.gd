@@ -33,6 +33,6 @@ func _physics_process(delta):
 		if (abs(enemy.position.x - player.position.x) < 400
 			or abs(enemy.position.y - player.position.y) < 200):
 			visible_enemies += 1
-	if visible_enemies == 0:
+	if visible_enemies < 3:
 		# alle Feinde sind tot, es werden neue generiert
 		generateEnemies()
