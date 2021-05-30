@@ -10,10 +10,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 807.731, 61.2083 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 521.945, 58.486 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 45.2865, 243.261 )
 
 [node name="Level_1" type="Node2D"]
@@ -95,7 +95,7 @@ mode = 1
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor/PlatformUp"]
 position = Vector2( 2295.54, 232.963 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="WallLeft" type="RigidBody2D" parent="Floor"]
 position = Vector2( -10, -10 )
@@ -105,12 +105,12 @@ mode = 1
 [node name="WallLeftCollisionShape2D2" type="CollisionShape2D" parent="Floor/WallLeft"]
 position = Vector2( 0.634394, 1.73301 )
 scale = Vector2( 0.01, 0.01 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Floor"]
 position = Vector2( 3945, 275 )
 scale = Vector2( 2.05, 1 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 365.265, 238.563 )

@@ -118,4 +118,5 @@ func _on_Area2D_body_entered(body):
 		else:
 			death()
 	elif body.name.begins_with("Power"):
+		body.queue_free()
 		power_up()
