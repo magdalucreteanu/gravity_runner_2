@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const MOVE_SPEED = 100
-const GRAVITY = 20
+const GRAVITY = 40
 const MAX_FALL_SPEED = 1000
 const MAX_FLIGHT_SPEED = -100
 
