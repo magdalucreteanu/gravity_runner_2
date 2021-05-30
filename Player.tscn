@@ -147,7 +147,7 @@ autoplay = true
 [node name="PlayerAnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.133333, 0.133333 )
 frames = SubResource( 5 )
-animation = "death"
+animation = "idle"
 
 [node name="PowerUpAnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.4, 0.4 )

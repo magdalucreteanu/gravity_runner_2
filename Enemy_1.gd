@@ -13,14 +13,19 @@ var y_velo = 0
 var facing_right = true
 
 var screenSize
+var player
 
 func _ready():
+	player = get_tree().get_root().get_node("Level_1/Player")
+	add_to_group("enemies")
 	screenSize = get_viewport().get_visible_rect().size
 	
 func _physics_process(_delta):
 	if (is_hit):
-		if position.y < 20:
-		  position.y = 20
+		#if position.y < 20:
+		#  position.y = 20
+		if position.y < 0:
+			queue_free()
 		move_and_slide(Vector2(0, y_velo), Vector2(0, -1))
 		y_velo -= GRAVITY
 		if y_velo < MAX_FLIGHT_SPEED:
@@ -38,6 +43,8 @@ func _physics_process(_delta):
 			
 
 func _on_EnemyArea_body_entered(body):
+	if "WallLeft" in body.name:
+		queue_free()
 	if "Bullet" in body.name:
 		var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("DamageAudioStreamPlayer")
 		if !audioPlayer.is_playing():

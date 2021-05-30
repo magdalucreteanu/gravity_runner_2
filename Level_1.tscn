@@ -4,14 +4,14 @@
 [ext_resource path="res://Sprites/0.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/2.png" type="Texture" id=3]
 [ext_resource path="res://Sounds.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Enemy_1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://EnemyList.gd" type="Script" id=5]
 [ext_resource path="res://PowerUp.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 807.731, 61.2083 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 51.5932, 243.261 )
+extents = Vector2( 45.2865, 243.261 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 521.945, 58.7707 )
@@ -56,8 +56,14 @@ texture = ExtResource( 2 )
 position = Vector2( 912.97, 320.73 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor"]
-position = Vector2( 53.4394, 163.301 )
+[node name="WallLeft" type="RigidBody2D" parent="Floor"]
+position = Vector2( -10, -10 )
+scale = Vector2( 100, 100 )
+mode = 1
+
+[node name="WallLeftCollisionShape2D2" type="CollisionShape2D" parent="Floor/WallLeft"]
+position = Vector2( 0.634394, 1.73301 )
+scale = Vector2( 0.01, 0.01 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor"]
@@ -68,15 +74,7 @@ shape = SubResource( 3 )
 position = Vector2( 365.265, 238.563 )
 
 [node name="EnemyList" type="Node2D" parent="."]
-
-[node name="Enemy_6" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 1510.25, 99.2319 )
-
-[node name="Enemy_7" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 2137.66, 42.5995 )
-
-[node name="Enemy_8" parent="EnemyList" instance=ExtResource( 5 )]
-position = Vector2( 2761.76, 42.4723 )
+script = ExtResource( 5 )
 
 [node name="ScoreLabel" type="RichTextLabel" parent="."]
 margin_left = 120.0
@@ -111,4 +109,10 @@ __meta__ = {
 [node name="Sounds" parent="." instance=ExtResource( 4 )]
 
 [node name="PowerUp" parent="." instance=ExtResource( 6 )]
-position = Vector2( 705.592, 160.362 )
+position = Vector2( 700, 160 )
+
+[node name="PowerUp2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1500, 160 )
+
+[node name="PowerUp3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2300, 60 )
