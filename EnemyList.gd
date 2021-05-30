@@ -30,7 +30,7 @@ func _physics_process(delta):
 	respawn_time_enemies -= delta
 	
 	if respawn_time_enemies < 0:
-		respawn_time_enemies = 10
+		respawn_time_enemies = 7
 		# mehr Gegner
 		generateEnemies()
 	#var visible_enemies = 0;

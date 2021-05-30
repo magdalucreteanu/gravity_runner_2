@@ -15,8 +15,14 @@ onready var _powerup_animated_sprite = $PowerUpAnimatedSprite
 var y_velo = 0
 var facing_right = true
 
+var blink_timer
+
 func _ready():
 	_powerup_animated_sprite.visible = false
+	
+	blink_timer = Timer.new()
+	blink_timer.connect("timeout", self, "_on_blink_timeout")
+	add_child(blink_timer)
 #	var tilemap_rect = get_parent().get_node("TileMap").get_used_rect()
 #	var tilemap_cell_size = get_parent().get_node("TileMap").cell_size 
 #	$Camera2D.limit_left = tilemap_rect.postition.x * tilemap_cell_size.x
@@ -95,6 +101,7 @@ func death():
 	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("DeathAudioStreamPlayer")
 	if !audioPlayer.is_playing():
 		audioPlayer.play()
+	start_blinking(0.05)
 	yield(get_tree().create_timer(0.5), 'timeout')
 	get_tree().reload_current_scene()
 
@@ -120,3 +127,19 @@ func _on_Area2D_body_entered(body):
 	elif body.name.begins_with("Power"):
 		body.queue_free()
 		power_up()
+
+func _on_blink_timeout():
+	if is_visible():
+		hide()
+	else:
+		show()
+		
+func start_blinking(interval):
+	blink_timer.set_wait_time(interval)
+	blink_timer.start()
+
+func stop_blinking():
+	show()
+	blink_timer.stop()
+
+		
