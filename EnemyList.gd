@@ -30,8 +30,8 @@ func _physics_process(delta):
 	var enemies_list = get_tree().get_nodes_in_group("enemies")
 	# wir ignorieren enemies die zu weit werg vom Player sind
 	for enemy in enemies_list:
-		if (abs(enemy.position.x - player.position.x) < 800
-			or abs(enemy.position.y - player.position.y) < 400):
+		if (abs(enemy.position.x - player.position.x) < 400
+			or abs(enemy.position.y - player.position.y) < 200):
 			visible_enemies += 1
 	if visible_enemies == 0:
 		# alle Feinde sind tot, es werden neue generiert

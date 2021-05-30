@@ -45,6 +45,8 @@ func _physics_process(_delta):
 func _on_EnemyArea_body_entered(body):
 	if "WallLeft" in body.name:
 		queue_free()
+	if "PlatformUp" in body.name:
+		position.y -= 50
 	if "Bullet" in body.name:
 		var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("DamageAudioStreamPlayer")
 		if !audioPlayer.is_playing():

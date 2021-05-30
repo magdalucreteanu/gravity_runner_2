@@ -76,14 +76,14 @@ animations = [ {
 "name": "run",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 22 ), ExtResource( 24 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 30 ), ExtResource( 23 ), ExtResource( 27 ) ],
-"loop": true,
-"name": "run_shoot",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 32 ), ExtResource( 31 ), ExtResource( 34 ), ExtResource( 33 ) ],
 "loop": true,
 "name": "idle_shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 24 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 30 ), ExtResource( 23 ), ExtResource( 27 ) ],
+"loop": true,
+"name": "run_shoot",
 "speed": 5.0
 } ]
 

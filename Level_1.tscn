@@ -10,11 +10,11 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 807.731, 61.2083 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 521.945, 58.486 )
+
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 45.2865, 243.261 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 521.945, 58.7707 )
 
 [node name="Level_1" type="Node2D"]
 
@@ -41,6 +41,40 @@ scale = Vector2( 2.654, 2.654 )
 texture = ExtResource( 3 )
 offset = Vector2( -1706.28, -55.6924 )
 
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, -1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 680.212, 338.118 )
+scale = Vector2( 2.65374, 2.65374 )
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 6566.01, 485.958 )
+scale = Vector2( 2.654, 2.654 )
+texture = ExtResource( 3 )
+offset = Vector2( -1706.28, -55.6924 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 2700, -1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 680.212, 338.118 )
+scale = Vector2( 2.65374, 2.65374 )
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 6566.01, 485.958 )
+scale = Vector2( 2.654, 2.654 )
+texture = ExtResource( 3 )
+offset = Vector2( -1706.28, -55.6924 )
+
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2( -2, 80 )
 __meta__ = {
@@ -56,6 +90,13 @@ texture = ExtResource( 2 )
 position = Vector2( 912.97, 320.73 )
 shape = SubResource( 1 )
 
+[node name="PlatformUp" type="RigidBody2D" parent="Floor"]
+mode = 1
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor/PlatformUp"]
+position = Vector2( 2295.54, 232.963 )
+shape = SubResource( 3 )
+
 [node name="WallLeft" type="RigidBody2D" parent="Floor"]
 position = Vector2( -10, -10 )
 scale = Vector2( 100, 100 )
@@ -66,8 +107,9 @@ position = Vector2( 0.634394, 1.73301 )
 scale = Vector2( 0.01, 0.01 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor"]
-position = Vector2( 2295.54, 232.963 )
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Floor"]
+position = Vector2( 3945, 275 )
+scale = Vector2( 2.05, 1 )
 shape = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
