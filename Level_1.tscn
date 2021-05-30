@@ -76,7 +76,7 @@ texture = ExtResource( 3 )
 offset = Vector2( -1706.28, -55.6924 )
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( 5400, -1 )
+position = Vector2( 2700, -1 )
 __meta__ = {
 "_edit_group_": true
 }

@@ -11,7 +11,10 @@ onready var anim_player = $AnimationPlayer
 onready var sprite = $Sprite
 onready var _animated_sprite = $PlayerAnimatedSprite
 onready var _powerup_animated_sprite = $PowerUpAnimatedSprite
- 
+
+# Camera
+onready var camera = $Camera2D
+
 var y_velo = 0
 var facing_right = true
 
@@ -35,6 +38,9 @@ func _physics_process(_delta):
 	#var viewportInfo : Rect2 = get_viewport().get_visible_rect()
 	var scoreLabel = get_tree().get_root().get_node("Level_1/ScoreLabel")
 	var scoreText = get_tree().get_root().get_node("Level_1/ScoreText")
+	#var visible_rect_position = get_viewport().get_visible_rect().position
+	#scoreLabel.set_position(Vector2(camera.limit_left + 30, camera.limit_top + 80))
+	#scoreText.set_position(Vector2(camera.limit_left + 80, camera.limit_top + 80))	
 	scoreLabel.set_position(Vector2(position.x - 30, position.y - 80))
 	scoreText.set_position(Vector2(position.x + 20, position.y - 80))
 	
