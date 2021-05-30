@@ -75,6 +75,23 @@ scale = Vector2( 2.654, 2.654 )
 texture = ExtResource( 3 )
 offset = Vector2( -1706.28, -55.6924 )
 
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 5400, -1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 680.212, 338.118 )
+scale = Vector2( 2.65374, 2.65374 )
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 6566.01, 485.958 )
+scale = Vector2( 2.654, 2.654 )
+texture = ExtResource( 3 )
+offset = Vector2( -1706.28, -55.6924 )
+
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2( -2, 80 )
 __meta__ = {

@@ -7,27 +7,30 @@ const MAX_FLIGHT_SPEED = -100
 
 var lives = 3
 
-var is_hit = false;
+var is_hit_by_bomb = false;
 
 var y_velo = 0
 var facing_right = true
 
 var screenSize
 var player
+var rotatorSprite
 
 func _ready():
 	player = get_tree().get_root().get_node("Level_1/Player")
 	add_to_group("enemies")
 	screenSize = get_viewport().get_visible_rect().size
+	rotatorSprite = get_node("Rotator")
+	rotatorSprite.visible = false
 	
 func _physics_process(_delta):
-	if (is_hit):
+	if (is_hit_by_bomb):
 		#if position.y < 20:
 		#  position.y = 20
 		if position.y < 0:
 			queue_free()
 		move_and_slide(Vector2(0, y_velo), Vector2(0, -1))
-		y_velo -= GRAVITY
+		y_velo -= 4*GRAVITY
 		if y_velo < MAX_FLIGHT_SPEED:
 			y_velo = MAX_FLIGHT_SPEED
 	else:
@@ -59,7 +62,8 @@ func _on_EnemyArea_body_entered(body):
 		if (lives == 0):
 			queue_free()
 	if "Bomb" in body.name:
-		is_hit = true
+		is_hit_by_bomb = true
+		rotatorSprite.visible = true
 		var scoreText = get_tree().get_root().get_node("Level_1/ScoreText")
 		var score = int(scoreText.get_text())
 		score += 10
