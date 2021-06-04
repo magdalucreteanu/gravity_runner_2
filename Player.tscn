@@ -71,11 +71,6 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 22 ), ExtResource( 24 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 30 ), ExtResource( 23 ), ExtResource( 27 ) ],
 "loop": true,
 "name": "run_shoot",
@@ -85,6 +80,11 @@ animations = [ {
 "loop": true,
 "name": "idle_shoot",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
 } ]
 
 [sub_resource type="SpriteFrames" id=6]
@@ -105,6 +105,7 @@ __meta__ = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -1.33333, 6 )
@@ -142,6 +143,7 @@ script = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -40.0
 autoplay = true
 
 [node name="PlayerAnimatedSprite" type="AnimatedSprite" parent="."]
@@ -154,5 +156,4 @@ scale = Vector2( 0.4, 0.4 )
 frames = SubResource( 6 )
 animation = "lightning"
 frame = 12
-
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/0.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Sounds.tscn" type="PackedScene" id=4]
 [ext_resource path="res://EnemyList.gd" type="Script" id=5]
 [ext_resource path="res://PowerUp.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Enemy_2.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 807.731, 61.2083 )
@@ -41,53 +42,13 @@ scale = Vector2( 2.654, 2.654 )
 texture = ExtResource( 3 )
 offset = Vector2( -1706.28, -55.6924 )
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( 0, -1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2( 680.212, 338.118 )
+[node name="Sprite3" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 3380.21, 338.118 )
 scale = Vector2( 2.65374, 2.65374 )
 texture = ExtResource( 3 )
 
-[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2( 6566.01, 485.958 )
-scale = Vector2( 2.654, 2.654 )
-texture = ExtResource( 3 )
-offset = Vector2( -1706.28, -55.6924 )
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( 2700, -1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2( 680.212, 338.118 )
-scale = Vector2( 2.65374, 2.65374 )
-texture = ExtResource( 3 )
-
-[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2( 6566.01, 485.958 )
-scale = Vector2( 2.654, 2.654 )
-texture = ExtResource( 3 )
-offset = Vector2( -1706.28, -55.6924 )
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( 2700, -1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
-position = Vector2( 680.212, 338.118 )
-scale = Vector2( 2.65374, 2.65374 )
-texture = ExtResource( 3 )
-
-[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
-position = Vector2( 6566.01, 485.958 )
+[node name="Sprite4" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 9266.01, 485.958 )
 scale = Vector2( 2.654, 2.654 )
 texture = ExtResource( 3 )
 offset = Vector2( -1706.28, -55.6924 )
@@ -107,10 +68,7 @@ texture = ExtResource( 2 )
 position = Vector2( 912.97, 320.73 )
 shape = SubResource( 1 )
 
-[node name="PlatformUp" type="RigidBody2D" parent="Floor"]
-mode = 1
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor/PlatformUp"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor"]
 position = Vector2( 2295.54, 232.963 )
 shape = SubResource( 2 )
 
@@ -169,9 +127,16 @@ __meta__ = {
 
 [node name="PowerUp" parent="." instance=ExtResource( 6 )]
 position = Vector2( 700, 160 )
+z_index = -1
+collision_mask = 2
 
 [node name="PowerUp2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1500, 160 )
+collision_mask = 2
 
 [node name="PowerUp3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2300, 60 )
+collision_mask = 2
+
+[node name="Enemy_2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 975.678, 168.933 )

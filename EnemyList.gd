@@ -14,8 +14,11 @@ func generateEnemies():
 	var rand = RandomNumberGenerator.new()
 	var max_enemies = rand.randf_range(3, 5)
 	var enemyScene = load("res://Enemy_1.tscn")
+	var enemyScene2 = load("res://Enemy_2.tscn")
 	for i in range(0, max_enemies):
 		var enemy = enemyScene.instance()
+		rand.randomize()
+		var enemy2 = enemyScene2.instance()
 		rand.randomize()
 		var x = rand.randf_range(300, 800)
 		rand.randomize()

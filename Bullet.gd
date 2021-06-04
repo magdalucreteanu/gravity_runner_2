@@ -6,9 +6,10 @@ var reload_time_bullet = 0
 const bullet = preload("res://Bullet.tscn")
 
 # Bomb variables
-const bomb_speed = 5
+const bomb_speed = 7
 var reload_time_bomb = 0
 const bomb = preload("res://Bomb.tscn")
+const max_bomb_speed = 1100
 
 var _animated_sprite
 
@@ -39,7 +40,7 @@ func _process(delta: float) -> void:
 		bombLabel.set_text("")
 	
 	if Input.is_action_pressed("right_mouse_button") and reload_time_bomb < 0:
-		reload_time_bomb = 5
+		reload_time_bomb = 6
 		fire_bomb()
 			
 		
@@ -63,8 +64,11 @@ func fire_bomb():
 	var bomb_instance = bomb.instance()
 	bomb_instance.position = $BulletPoint.get_global_position()
 	bomb_instance.rotation_degrees = rotation_degrees
-	var distanceToMouse = bomb_instance.position.distance_to(get_global_mouse_position()) 
-	bomb_instance.apply_impulse(Vector2(),Vector2(bomb_speed * distanceToMouse, 0).rotated(rotation))
+	var distanceToMouse = bomb_instance.position.distance_to(get_global_mouse_position())
+	if  bomb_speed * distanceToMouse < max_bomb_speed:
+		bomb_instance.apply_impulse(Vector2(),Vector2(bomb_speed * distanceToMouse, 0).rotated(rotation))
+	else:
+		bomb_instance.apply_impulse(Vector2(),Vector2(max_bomb_speed, 0).rotated(rotation))
 	get_tree().get_root().call_deferred("add_child", bomb_instance)
 	# Bomb Sound
 	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("BombAudioStreamPlayer")
