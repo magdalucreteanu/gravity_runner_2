@@ -10,7 +10,7 @@ var respawn_time_enemies = 0
 func _ready():
 	player = get_tree().get_root().get_node("Level_1/Player")
 
-func generateEnemies():
+func generateGroundEnemies():
 	var rand = RandomNumberGenerator.new()
 	var max_enemies = rand.randf_range(3, 5)
 	var enemyScene = load("res://Enemy_1.tscn")
@@ -35,7 +35,7 @@ func _physics_process(delta):
 	if respawn_time_enemies < 0:
 		respawn_time_enemies = 7
 		# mehr Gegner
-		generateEnemies()
+		generateGroundEnemies()
 	#var visible_enemies = 0;
 	#var enemies_list = get_tree().get_nodes_in_group("enemies")
 	# wir ignorieren enemies die zu weit werg vom Player sind
