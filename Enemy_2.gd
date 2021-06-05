@@ -14,9 +14,6 @@ var rotatorSprite
 onready var anim_player = get_node("AnimationPlayer")
 onready var effect_player = get_node("AnimationPlayer2")
 
-
-
-
 func _ready():
 	player = get_tree().get_root().get_node("Level_1/Player")
 	add_to_group("enemies")

@@ -7,7 +7,7 @@ const MAX_FLIGHT_SPEED = -100
 
 var lives = 4
 
-var is_hit_by_bomb = false;
+var is_hit_by_bomb = false
 
 var y_velo = 0
 var facing_right = true
@@ -16,6 +16,8 @@ var screenSize
 var player
 var rotatorSprite
 var explosionSprite
+
+var is_on_platform_up = false
 
 
 onready var anim_player = get_node("AnimationPlayer")
@@ -50,7 +52,9 @@ func _on_EnemyArea_body_entered(body):
 	if "WallLeft" in body.name:
 		queue_free()
 	if "PlatformUp" in body.name:
-		position.y -= 50
+		if !is_on_platform_up:
+			position.y -= 100
+			is_on_platform_up = true
 	if "Bullet" in body.name:
 		var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("DamageAudioStreamPlayer")
 		if !audioPlayer.is_playing():

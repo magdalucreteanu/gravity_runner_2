@@ -14,11 +14,8 @@ func generateGroundEnemies():
 	var rand = RandomNumberGenerator.new()
 	var max_enemies = rand.randf_range(3, 5)
 	var enemyScene = load("res://Enemy_1.tscn")
-	var enemyScene2 = load("res://Enemy_2.tscn")
 	for i in range(0, max_enemies):
 		var enemy = enemyScene.instance()
-		rand.randomize()
-		var enemy2 = enemyScene2.instance()
 		rand.randomize()
 		var x = rand.randf_range(300, 800)
 		rand.randomize()
@@ -28,14 +25,31 @@ func generateGroundEnemies():
 		enemy.set_name('Enemy_'+str(x)+'_'+str(y))
 		add_child(enemy)
 		
+func generateFlyingEnemies():
+	var rand = RandomNumberGenerator.new()
+	var max_enemies = 3
+	var enemyScene2 = load("res://Enemy_2.tscn")
+	for i in range(0, max_enemies):
+		var enemy2 = enemyScene2.instance()
+		rand.randomize()
+		var x = rand.randf_range(300, 800)
+		rand.randomize()
+		var y = rand.randf_range(70, 110)
+		enemy2.position.x = player.position.x + x * (i+1)
+		enemy2.position.y = y
+		enemy2.set_name('Enemy_2_'+str(x)+'_'+str(y))
+		add_child(enemy2)
+		
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	respawn_time_enemies -= delta
 	
 	if respawn_time_enemies < 0:
-		respawn_time_enemies = 7
+		respawn_time_enemies = 10
 		# mehr Gegner
 		generateGroundEnemies()
+		generateFlyingEnemies()
 	#var visible_enemies = 0;
 	#var enemies_list = get_tree().get_nodes_in_group("enemies")
 	# wir ignorieren enemies die zu weit werg vom Player sind
