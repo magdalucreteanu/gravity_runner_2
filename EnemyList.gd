@@ -8,7 +8,7 @@ var respawn_time_enemies = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_tree().get_root().get_node("Level_1/Player")
+	player = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player")
 
 func generateGroundEnemies():
 	var rand = RandomNumberGenerator.new()

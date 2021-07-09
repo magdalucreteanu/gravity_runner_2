@@ -61,17 +61,17 @@ func _process(delta: float) -> void:
 	reload_time_bullet -= delta
 
 
-func _physics_process(_delta):		
+func _physics_process(_delta):
 	#var viewportInfo : Rect2 = get_viewport().get_visible_rect()
-	var scoreLabel = get_tree().get_root().get_node("Level_1/ScoreLabel")
-	var scoreText = get_tree().get_root().get_node("Level_1/ScoreText")
+	var scoreLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreLabel")
+	var scoreText = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreText")
 	#var visible_rect_position = get_viewport().get_visible_rect().position
 	#scoreLabel.set_position(Vector2(camera.limit_left + 30, camera.limit_top + 80))
 	#scoreText.set_position(Vector2(camera.limit_left + 80, camera.limit_top + 80))	
 	scoreLabel.set_position(Vector2(position.x - 30, position.y - 80))
 	scoreText.set_position(Vector2(position.x + 20, position.y - 80))
 	
-	var bombLabel = get_tree().get_root().get_node("Level_1/BombLabel")
+	var bombLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/BombLabel")
 	bombLabel.set_position(Vector2(position.x - 30, position.y - 100))
 	
 	var run_shoot_timer = get_node("BulletKinematicBody2D").get("run_shoot_timer")
@@ -122,7 +122,7 @@ func _physics_process(_delta):
 	y_velo += GRAVITY
 	if grounded and Input.is_action_just_pressed("jump"):
 		y_velo = -JUMP_FORCE
-		var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("JumpAudioStreamPlayer")
+		var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("JumpAudioStreamPlayer")
 		if !audioPlayer.is_playing():
 			audioPlayer.play()
 	if grounded and y_velo >= 5:
@@ -166,7 +166,7 @@ func play_anim(anim_name):
 
 func death():
 # warning-ignore:return_value_discarded
-	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("DeathAudioStreamPlayer")
+	var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("DeathAudioStreamPlayer")
 	if !audioPlayer.is_playing():
 		audioPlayer.play()
 	start_blinking(0.05)
@@ -174,7 +174,7 @@ func death():
 	get_tree().reload_current_scene()
 
 func power_up():
-	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("PowerUpAudioStreamPlayer")
+	var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("PowerUpAudioStreamPlayer")
 	if !audioPlayer.is_playing():
 		audioPlayer.play()
 	_powerup_animated_sprite.visible = true
@@ -184,7 +184,7 @@ func _on_Area2D_body_entered(body):
 	#if "Enemy_1" in body.name or "Enemy_2" in body.name:
 	if body.name.begins_with("Enemy"):
 		if _powerup_animated_sprite.visible:
-			var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("EnemyDeathAudioStreamPlayer")
+			var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("EnemyDeathAudioStreamPlayer")
 			if !audioPlayer.is_playing():
 				audioPlayer.play()
 			body.queue_free()
