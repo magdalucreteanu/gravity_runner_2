@@ -130,9 +130,13 @@ func _physics_process(_delta):
 	if y_velo > MAX_FALL_SPEED:
 		y_velo = MAX_FALL_SPEED
  
-	if facing_right and move_dir < 0:
+	var xPlayerPosition = get_position().x
+	var xMousePosition = get_global_mouse_position().x
+	var playerLooksRight = (xPlayerPosition <= xMousePosition)
+	
+	if facing_right and !playerLooksRight:
 		flip()
-	if !facing_right and move_dir > 0:
+	if !facing_right and playerLooksRight:
 		flip()
 	
 	#if grounded:
