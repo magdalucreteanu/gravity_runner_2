@@ -30,7 +30,7 @@ var blink_timer
 
 #var state_maschine
 
-
+onready var sceneManager = get_node('/root/SceneManager')
 
 func _ready():
 #	do_my_animation_sequence()
@@ -62,6 +62,9 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(_delta):
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().reload_current_scene()
+		
 	#var viewportInfo : Rect2 = get_viewport().get_visible_rect()
 	var scoreLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreLabel")
 	var scoreText = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreText")
@@ -169,8 +172,13 @@ func death():
 	var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("DeathAudioStreamPlayer")
 	if !audioPlayer.is_playing():
 		audioPlayer.play()
+	
 	start_blinking(0.05)
-	yield(get_tree().create_timer(0.5), 'timeout')
+	yield(get_tree().create_timer(1.5), 'timeout')
+	
+	#var previousScene = load("res://Level_1.tscn") 
+	#sceneManager.popScene(previousScene.instance())
+	#get_tree().paused = true
 	get_tree().reload_current_scene()
 
 func power_up():
