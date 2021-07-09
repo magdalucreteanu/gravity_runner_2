@@ -15,7 +15,6 @@ var _animated_sprite
 var GunSprite
 
 
-var isAttacking = false
 var attack_anim = null
 var anim_numb = 1
 
@@ -33,10 +32,10 @@ func _ready():
 func _process(delta: float) -> void:
 	attack_anim = "AttackB"+str(anim_numb)
 	
-	if Input.is_action_just_pressed("left_mouse_button") and isAttacking == false:
+	if Input.is_action_just_pressed("left_mouse_button") and reload_time_bullet < 0:
 		$Timer.set_wait_time(1)
 		$Timer.start()
-		reload_time_bullet = 0.7
+		reload_time_bullet = 0.3
 		run_shoot_timer = 0.5
 		GunSprite.visible = true
 		do_my_animation_sequence()
@@ -99,10 +98,8 @@ func _process(delta: float) -> void:
 	
 
 func do_my_animation_sequence():
-	isAttacking = true
 	play_anim(attack_anim)
 	yield($AnimationPlayer2, "animation_finished")
-	isAttacking = false
 	
 func fire_bullet():
 	var bullet_instance = bullet.instance()
