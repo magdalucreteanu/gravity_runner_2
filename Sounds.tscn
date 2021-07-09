@@ -13,7 +13,6 @@
 
 [node name="BombReadyAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = 5.0
 
 [node name="BombAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
@@ -25,7 +24,7 @@ volume_db = 5.0
 
 [node name="JumpAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = 5.0
+volume_db = -5.0
 
 [node name="DeathAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

@@ -11,17 +11,35 @@ onready var anim_player = $AnimationPlayer
 onready var sprite = $Sprite
 onready var _animated_sprite = $PlayerAnimatedSprite
 onready var _powerup_animated_sprite = $PowerUpAnimatedSprite
+onready var player = get_node("AnimationPlayer")
 
 # Camera
 onready var camera = $Camera2D
 
 var y_velo = 0
-var facing_right = true
+var facing_right = false
+var reload_time_bullet = 0
+var isAttacking = false
+var attack_anim = null
+var anim_numb = 1
+
+#var attack_anim = null
+#var anim_numb = 1
 
 var blink_timer
 
+#var state_maschine
+
+
+
 func _ready():
+#	do_my_animation_sequence()
+#	Player.connect("finished", self, "playNextAnim")
+#	Player.play("Attack1");
+#	timer.set_wait_time(0.3)
+#	timer.start()
 	_powerup_animated_sprite.visible = false
+#	state_maschine = $AnimationTree.get("parameters/playback")
 	
 	blink_timer = Timer.new()
 	blink_timer.connect("timeout", self, "_on_blink_timeout")
@@ -32,6 +50,15 @@ func _ready():
 #	$Camera2D.limit_right = tilemap_rect.end.x * tilemap_cell_size.x
 #	$Camera2D.limit_top = tilemap_rect.postition.y * tilemap_cell_size.y
 #	$Camera2D.limit_bottom = tilemap_rect.end.y * tilemap_cell_size.y
+#	player.connect("animation_finished", self, "playNextAnim")
+#	player.play("Attack1");
+#
+#func playNextAnim():
+#	if(player.get_current_animation() == "Attack1"):
+#		player.play("Attack2")
+
+func _process(delta: float) -> void:
+	reload_time_bullet -= delta
 
 
 func _physics_process(_delta):		
@@ -49,20 +76,45 @@ func _physics_process(_delta):
 	
 	var run_shoot_timer = get_node("BulletKinematicBody2D").get("run_shoot_timer")
 	
+#	attack_anim = "Attack"+str(anim_numb) 
+	
+# warning-ignore:unused_variable
+#	var current = state_maschine.get_current_node()
 	var move_dir = 0
+	
+	
+	attack_anim = "Attack"+str(anim_numb)
+	
+	if Input.is_action_just_pressed("left_mouse_button") and isAttacking == false:
+		$Timer.set_wait_time(1)
+		$Timer.start()
+		do_my_animation_sequence()
+		
+		if $Timer.time_left > 0:
+			anim_numb += 1
+		
+		if anim_numb == 3:
+			anim_numb = 1
+
+#	elif Input.is_action_pressed("left_mouse_button") and anim_player.current_animation == "Attack1":
+#		play_anim("Attack2")
+
+
+
+		
+		
 	if Input.is_action_pressed("move_right"):
 		move_dir += 1
-		if run_shoot_timer <= 0:
-			_animated_sprite.play("run")
+		if run_shoot_timer <= 0 and isAttacking == false:
+			play_anim("Walk")
 	elif Input.is_action_pressed("move_left"):
 		move_dir -= 1
-		if run_shoot_timer <= 0:
-			_animated_sprite.play("run")
+		if run_shoot_timer <= 0 and isAttacking == false:
+			play_anim("Walk")
 	else:
-		if run_shoot_timer <= 0:
-			_animated_sprite.play("idle")
-		else:
-			_animated_sprite.play("idle_shoot")
+		if run_shoot_timer <= 0 and isAttacking == false:
+			play_anim("Idle")
+
 # warning-ignore:return_value_discarded
 	move_and_slide(Vector2(move_dir * MOVE_SPEED, y_velo), Vector2(0, -1))
 
@@ -91,10 +143,16 @@ func _physics_process(_delta):
 	#else:
 	#	play_anim("jump")
  
+func do_my_animation_sequence():
+	isAttacking = true
+	play_anim(attack_anim)
+	yield($AnimationPlayer, "animation_finished")
+	isAttacking = false
+
 func flip():
 	facing_right = !facing_right
-	#sprite.flip_h = !sprite.flip_h
-	_animated_sprite.flip_h = !_animated_sprite.flip_h
+	sprite.flip_h = !sprite.flip_h
+#	_animated_sprite.flip_h = !_animated_sprite.flip_h
  
 func play_anim(anim_name):
 	if anim_player.is_playing() and anim_player.current_animation == anim_name:
@@ -148,4 +206,30 @@ func stop_blinking():
 	show()
 	blink_timer.stop()
 
-		
+#onready var Player = get_node("AnimationPlayer")
+#
+#func do_my_animation_sequence():
+#	Player.play("Attack1")
+#	yield(get_node("AnimationPlayer"), "animation_finished")
+#	Player.play("Attack2")
+#	yield(get_node("AnimationPlayer"), "animation_finished")
+#	Player.play("Idle")
+#
+#func playNextAnim():
+#	if(Player.get_current_animation() == "Attack1"):
+#		Player.play("Attack2")
+
+func _on_Timer_timeout():
+	anim_numb = 1
+
+
+
+
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	print("Test1")
+
+
+
+

@@ -5,7 +5,7 @@ const GRAVITY = 40
 const MAX_FALL_SPEED = 1000
 const MAX_FLIGHT_SPEED = -100
 
-var lives = 4
+var lives = 3
 
 var is_hit_by_bomb = false
 
@@ -113,9 +113,6 @@ func explosion():
 	explosionSprite.visible = true
 	play_anim("Explosion")
 
-
-
-		
 
 
 

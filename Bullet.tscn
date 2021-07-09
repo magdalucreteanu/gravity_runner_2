@@ -32,6 +32,7 @@ tracks/0/keys = {
 }
 
 [node name="Bullet" type="RigidBody2D"]
+z_index = 1
 collision_layer = 4
 gravity_scale = 0.0
 contacts_reported = 1

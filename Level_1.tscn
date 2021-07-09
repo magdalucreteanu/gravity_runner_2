@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/0.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Sounds.tscn" type="PackedScene" id=4]
 [ext_resource path="res://EnemyList.gd" type="Script" id=5]
 [ext_resource path="res://PowerUp.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Test.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 807.731, 61.2083 )
@@ -139,3 +140,6 @@ collision_mask = 2
 [node name="PowerUp3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2300, 60 )
 collision_mask = 2
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 7 )]
+position = Vector2( 507.748, 249.464 )
