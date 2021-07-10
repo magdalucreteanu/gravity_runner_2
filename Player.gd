@@ -6,7 +6,7 @@ const JUMP_FORCE = 1000
 const GRAVITY = 50
 const MAX_FALL_SPEED = 1000
 
-const PORTAL_SPEED = 200
+const PORTAL_SPEED = 220
 var portal_velocity = Vector2()
 
 # Animation
@@ -39,8 +39,6 @@ var level_cleared = false
 var bombLabel
 var scoreLabel
 var scoreText
-
-var timeout_credits = 2
 
 var music_player
 
@@ -77,8 +75,8 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(_delta):
-	if !music_player.is_playing():
-		music_player.play()
+	#if !music_player.is_playing():
+	#	music_player.play()
 	
 	var disable_movement = camera.is_boss_dead() and abs(get_position().x - 4800) < 5;
 	
@@ -92,11 +90,6 @@ func _physics_process(_delta):
 				audioPlayer.play()
 			get_portal_velocity()
 			portal_velocity = move_and_slide(portal_velocity)
-		else:
-			timeout_credits -= _delta
-			if timeout_credits < 0:
-				#get_tree().change_scene("res://GodotCredits.tscn")
-				pass
 		return
 	
 	scoreLabel.set_position(Vector2(position.x - 30, position.y - 80))

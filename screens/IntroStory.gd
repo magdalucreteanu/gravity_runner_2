@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 onready var sceneManager = get_node('/root/SceneManager')
 
@@ -122,7 +122,7 @@ func finish():
 		# NOTE: This is called when the credits finish
 		# - Hook up your code to return to the relevant scene here, eg...
 		#get_tree().change_scene("res://scenes/MainMenu.tscn")
-	sceneManager.openWithLoading("res://Level_1.tscn")
+		sceneManager.openWithLoading("res://Level_1.tscn")
 
 
 func add_line():
