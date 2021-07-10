@@ -66,6 +66,7 @@ tracks/1/keys = {
 }
 
 [node name="Enemy_2" type="KinematicBody2D"]
+collision_layer = 16
 script = ExtResource( 7 )
 
 [node name="EnemyArea" type="Area2D" parent="."]

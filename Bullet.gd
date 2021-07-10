@@ -15,6 +15,7 @@ var _animated_sprite
 var GunSprite
 
 
+var isAttacking = false
 var attack_anim = null
 var anim_numb = 1
 
@@ -25,14 +26,14 @@ onready var anim_player = $AnimationPlayer2
 var run_shoot_timer = 0
 
 func _ready():
-	_animated_sprite = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player").get_node("PlayerAnimatedSprite")
+	_animated_sprite = get_tree().get_root().get_node("Level_1/Player").get_node("PlayerAnimatedSprite")
 	GunSprite = get_node("GunHand")
 	
 
 func _process(delta: float) -> void:
 	attack_anim = "AttackB"+str(anim_numb)
 	
-	if Input.is_action_just_pressed("left_mouse_button") and reload_time_bullet < 0:
+	if Input.is_action_just_pressed("left_mouse_button") and isAttacking == false:
 		$Timer.set_wait_time(1)
 		$Timer.start()
 		reload_time_bullet = 0.3
@@ -40,7 +41,6 @@ func _process(delta: float) -> void:
 		GunSprite.visible = true
 		do_my_animation_sequence()
 		fire_bullet()
-		
 		
 		if $Timer.time_left > 0:
 			anim_numb += 1
@@ -79,11 +79,11 @@ func _process(delta: float) -> void:
 ##			play_anim("Idle") 
 #			GunSprite.visible = false
 	
-	var bombLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/BombLabel")
+	var bombLabel = get_tree().get_root().get_node("Level_1/BombLabel")
 	reload_time_bomb -= delta
 	if reload_time_bomb < 0:
 		if (bombLabel.text == ""):
-			var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("BombReadyAudioStreamPlayer")
+			var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("BombReadyAudioStreamPlayer")
 			if !audioPlayer.is_playing():
 				audioPlayer.play()
 		bombLabel.set_text("BOMB READY!")
@@ -93,23 +93,26 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("right_mouse_button") and reload_time_bomb < 0:
 		reload_time_bomb = 6
 		fire_bomb()
+			
 		
 	look_at(get_global_mouse_position())
 	
 
 func do_my_animation_sequence():
+	isAttacking = true
 	play_anim(attack_anim)
 	yield($AnimationPlayer2, "animation_finished")
+	isAttacking = false
 	
 func fire_bullet():
 	var bullet_instance = bullet.instance()
 	bullet_instance.position = $BulletPoint.get_global_position()
 	bullet_instance.rotation_degrees = rotation_degrees
 	bullet_instance.apply_impulse(Vector2(),Vector2(bullet_speed, 0).rotated(rotation))
-	get_tree().get_root().get_node("SceneManager/Main/Viewport").call_deferred("add_child", bullet_instance)
+	get_tree().get_root().call_deferred("add_child", bullet_instance)
 	# Run Shoot animation
 	# Bullet Sound
-	var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("BulletAudioStreamPlayer")
+	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("BulletAudioStreamPlayer")
 	if !audioPlayer.is_playing():
 		audioPlayer.play()
 	
@@ -122,9 +125,9 @@ func fire_bomb():
 		bomb_instance.apply_impulse(Vector2(),Vector2(bomb_speed * distanceToMouse, 0).rotated(rotation))
 	else:
 		bomb_instance.apply_impulse(Vector2(),Vector2(max_bomb_speed, 0).rotated(rotation))
-	get_tree().get_root().get_node("SceneManager/Main/Viewport").call_deferred("add_child", bomb_instance)
+	get_tree().get_root().call_deferred("add_child", bomb_instance)
 	# Bomb Sound
-	var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("BombAudioStreamPlayer")
+	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("BombAudioStreamPlayer")
 	if !audioPlayer.is_playing():
 		audioPlayer.play()
 

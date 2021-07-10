@@ -95,9 +95,12 @@ tracks/0/keys = {
 
 [node name="Enemy_1" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
+z_index = 1
+collision_layer = 16
 script = ExtResource( 2 )
 
 [node name="EnemyArea" type="Area2D" parent="."]
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyArea"]
 shape = SubResource( 1 )

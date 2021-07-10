@@ -15,7 +15,7 @@ onready var anim_player = get_node("AnimationPlayer")
 onready var effect_player = get_node("AnimationPlayer2")
 
 func _ready():
-	player = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player")
+	player = get_tree().get_root().get_node("Level_1/Player")
 	add_to_group("enemies")
 	screenSize = get_viewport().get_visible_rect().size
 	rotatorSprite = get_node("Rotator")
@@ -38,11 +38,11 @@ func _on_EnemyArea_body_entered(body):
 	if "PlatformUp" in body.name:
 		position.y -= 50
 	if "Bullet" in body.name:
-		var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("DamageAudioStreamPlayer")
+		var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("DamageAudioStreamPlayer")
 		if !audioPlayer.is_playing():
 			audioPlayer.play()
 		lives -= 1
-		var scoreText = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreText")
+		var scoreText = get_tree().get_root().get_node("Level_1/ScoreText")
 		var score = int(scoreText.get_text())
 		score += 1
 		scoreText.set_text(str(score))
@@ -51,7 +51,7 @@ func _on_EnemyArea_body_entered(body):
 	while "GravityArea" in body.name:
 		is_hit_by_bomb = true
 		rotatorSprite.visible = true
-		var scoreText = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreText")
+		var scoreText = get_tree().get_root().get_node("Level_1/ScoreText")
 		var score = int(scoreText.get_text())
 		score += 20
 		scoreText.set_text(str(score))
