@@ -23,7 +23,7 @@ func generateGroundEnemies():
 	for i in range(0, max_enemies):
 		var enemy = enemyScene.instance()
 		rand.randomize()
-		var x = rand.randi_range(300, 800)
+		var x = rand.randi_range(300, 600)
 		rand.randomize()
 		var y = rand.randi_range(20, 200)
 		enemy.position.x = player.position.x + x * (i+1)
@@ -42,7 +42,7 @@ func generateFlyingEnemies():
 	for i in range(0, max_enemies):
 		var enemy2 = enemyScene2.instance()
 		rand.randomize()
-		var x = rand.randi_range(300, 800)
+		var x = rand.randi_range(300, 600)
 		rand.randomize()
 		var y = rand.randi_range(70, 110)
 		enemy2.position.x = player.position.x + x * (i+1)

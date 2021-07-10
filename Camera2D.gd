@@ -18,15 +18,24 @@ var trauma_power = 2  # Trauma exponent. Use [2, 3].
 
 var wait_start_end_music = 2
 
+var portalAnimationSprite
+
 func set_shaking(value):
 	shaking = value
 
 func add_trauma(amount):
 	trauma = min(trauma + amount, 1.0)
+	
+func is_boss_dead():
+	return boss_dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player")
+
+	portalAnimationSprite = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/PortalAnimatedSprite")
+	portalAnimationSprite.visible = false
+
 	randomize()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,6 +54,8 @@ func _process(delta):
 		audioPlayer.stop()
 		wait_start_end_music -= delta
 		if wait_start_end_music < 0:
+			portalAnimationSprite.visible = true
+			portalAnimationSprite.play("default")
 			var endGameAudioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player").get_node("EndGameAudioStreamPlayer")
 			if !endGameAudioPlayer.is_playing():
 				endGameAudioPlayer.play()

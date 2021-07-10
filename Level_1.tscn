@@ -64,6 +64,12 @@ scale = Vector2( 2.654, 2.654 )
 texture = ExtResource( 3 )
 offset = Vector2( -1706.28, -55.6924 )
 
+[node name="Sprite5" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 9800, 485.958 )
+scale = Vector2( 2.654, 2.654 )
+texture = ExtResource( 3 )
+offset = Vector2( -1706.28, -55.6924 )
+
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2( -2, 80 )
 __meta__ = {
@@ -100,6 +106,16 @@ shape = SubResource( 3 )
 position = Vector2( 3945, 275 )
 scale = Vector2( 2.05, 1 )
 shape = SubResource( 2 )
+
+[node name="WallRight" type="RigidBody2D" parent="Floor"]
+position = Vector2( 4890, -10 )
+scale = Vector2( 100, 100 )
+mode = 1
+
+[node name="WallRightCollisionShape2D2" type="CollisionShape2D" parent="Floor/WallRight"]
+position = Vector2( 0.634394, 1.73301 )
+scale = Vector2( 0.01, 0.01 )
+shape = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 365.265, 238.563 )
@@ -156,4 +172,5 @@ collision_mask = 2
 position = Vector2( 4800, 220 )
 
 [node name="PortalAnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 4800, 200.327 )
 frames = SubResource( 4 )

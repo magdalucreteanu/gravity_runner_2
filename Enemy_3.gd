@@ -9,7 +9,7 @@ var player
 
 var shoot_timer = 0
 
-var lives = 20
+var lives = 5
 
 var rand
 

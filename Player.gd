@@ -6,6 +6,9 @@ const JUMP_FORCE = 1000
 const GRAVITY = 50
 const MAX_FALL_SPEED = 1000
 
+const PORTAL_SPEED = 80
+var portal_velocity = Vector2()
+
 # Animation
 onready var anim_player = $AnimationPlayer
 onready var sprite = $Sprite
@@ -38,37 +41,34 @@ func set_level_cleared():
 func get_level_cleared():
 	return level_cleared
 
+func get_portal_velocity():
+	portal_velocity = Vector2()
+	portal_velocity.y -= 1
+	portal_velocity = portal_velocity.normalized() * PORTAL_SPEED
+	
 func _ready():
 	add_to_group("Player")
-#	do_my_animation_sequence()
-#	Player.connect("finished", self, "playNextAnim")
-#	Player.play("Attack1");
-#	timer.set_wait_time(0.3)
-#	timer.start()
+	
+	
 	_powerup_animated_sprite.visible = false
-#	state_maschine = $AnimationTree.get("parameters/playback")
 	
 	blink_timer = Timer.new()
 	blink_timer.connect("timeout", self, "_on_blink_timeout")
 	add_child(blink_timer)
-#	var tilemap_rect = get_parent().get_node("TileMap").get_used_rect()
-#	var tilemap_cell_size = get_parent().get_node("TileMap").cell_size 
-#	$Camera2D.limit_left = tilemap_rect.postition.x * tilemap_cell_size.x
-#	$Camera2D.limit_right = tilemap_rect.end.x * tilemap_cell_size.x
-#	$Camera2D.limit_top = tilemap_rect.postition.y * tilemap_cell_size.y
-#	$Camera2D.limit_bottom = tilemap_rect.end.y * tilemap_cell_size.y
-#	player.connect("animation_finished", self, "playNextAnim")
-#	player.play("Attack1");
-#
-#func playNextAnim():
-#	if(player.get_current_animation() == "Attack1"):
-#		player.play("Attack2")
 
 func _process(delta: float) -> void:
 	reload_time_bullet -= delta
 
 
-func _physics_process(_delta):		
+func _physics_process(_delta):
+	var disable_movement = camera.is_boss_dead() and abs(get_position().x - 4800) < 5;
+	
+	if (disable_movement):
+		if (get_position().y > -200):
+			get_portal_velocity()
+			portal_velocity = move_and_slide(portal_velocity)
+		return
+	
 	#var viewportInfo : Rect2 = get_viewport().get_visible_rect()
 	var scoreLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreLabel")
 	var scoreText = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreText")
