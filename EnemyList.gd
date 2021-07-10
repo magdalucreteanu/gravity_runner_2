@@ -3,18 +3,24 @@ extends Node2D
 # Declare member variables here. Examples:
 
 var player
+var enemy3
 
 var respawn_time_enemies = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player")
+	enemy3 = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Enemy_3")
 
 func generateGroundEnemies():
+	if enemy3 and enemy3.level_cleared():
+		return
+		
 	var rand = RandomNumberGenerator.new()
-	var max_enemies = rand.randi_range(3, 5)
+	var max_enemies = rand.randi_range(2, 4)
 	var enemyScene = load("res://Enemy_1.tscn")
-	max_enemies = 0
+	#max_enemies = 0
 	for i in range(0, max_enemies):
 		var enemy = enemyScene.instance()
 		rand.randomize()
@@ -27,10 +33,13 @@ func generateGroundEnemies():
 		add_child(enemy)
 		
 func generateFlyingEnemies():
+	if enemy3 and enemy3.level_cleared():
+		return
+		
 	var rand = RandomNumberGenerator.new()
 	var max_enemies = 3
 	var enemyScene2 = load("res://Enemy_2.tscn")
-	max_enemies = 0
+	#max_enemies = 0
 	for i in range(0, max_enemies):
 		var enemy2 = enemyScene2.instance()
 		rand.randomize()

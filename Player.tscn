@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/RobotFree/png/Run (2).png" type="Texture" id=2]
@@ -91,6 +91,7 @@
 [ext_resource path="res://Sprites/Ix/ch_shifter002_50_04.png" type="Texture" id=89]
 [ext_resource path="res://Sprites/Ix/ch_shifter002_50_07.png" type="Texture" id=90]
 [ext_resource path="res://Sprites/Ix/ch_shifter002_50_09.png" type="Texture" id=91]
+[ext_resource path="res://Camera2D.gd" type="Script" id=92]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21.0458, 36.9363 )
@@ -209,6 +210,11 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 32 ), ExtResource( 31 ), ExtResource( 34 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "idle_shoot",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 22 ), ExtResource( 24 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 30 ), ExtResource( 23 ), ExtResource( 27 ) ],
 "loop": true,
 "name": "run_shoot",
@@ -218,11 +224,6 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 10.0
-}, {
-"frames": [ ExtResource( 32 ), ExtResource( 31 ), ExtResource( 34 ), ExtResource( 33 ) ],
-"loop": true,
-"name": "idle_shoot",
-"speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=9]
@@ -436,6 +437,7 @@ limit_right = 10000
 limit_bottom = 0
 smoothing_enabled = true
 smoothing_speed = 7.0
+script = ExtResource( 92 )
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -502,6 +504,7 @@ parameters/playback = SubResource( 22 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="BulletKinematicBody2D/Timer" to="BulletKinematicBody2D" method="_on_Timer_timeout"]

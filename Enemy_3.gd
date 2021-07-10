@@ -9,19 +9,24 @@ var player
 
 var shoot_timer = 0
 
-var lives = 50
+var lives = 20
+
+var level_cleared
 
 var rand
 
 onready var anim_player = get_node("AnimationPlayer")
 
 # Declare member variables here. Examples:
-# var a = 2
+# var a = 2a
 # var b = "text"
 
+func level_cleared():
+	return level_cleared
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	level_cleared = false
 	rand = RandomNumberGenerator.new()
 	player = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player")
 	add_to_group("enemies")
@@ -37,8 +42,10 @@ func player_in_range():
 	return abs(enemy_position - player_position) < 1000
 
 func _process(delta: float) -> void:
-	if (!player_in_range() and lives == 50):
+	if (!player_in_range()): #and lives == 50):
 		return
+	
+	level_cleared = true
 	
 	shoot_timer -= delta
 	
@@ -97,7 +104,6 @@ func _on_Timer_timeout():
 func _on_Timer2_timeout():
 	fire_Enemy_3_Rocket()
 
-
 func _on_EnemyArea_body_entered(body):
 	if "Bullet" in body.name:
 		var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("DamageAudioStreamPlayer")
@@ -110,3 +116,6 @@ func _on_EnemyArea_body_entered(body):
 		scoreText.set_text(str(score))
 		if (lives == 0):
 			queue_free()
+			# start shaking camera
+			var camera = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player").get_node("Camera2D")
+			camera.set_shaking(true)
