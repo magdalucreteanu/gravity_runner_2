@@ -15,6 +15,7 @@ onready var sprite = $Sprite
 onready var _animated_sprite = $PlayerAnimatedSprite
 onready var _powerup_animated_sprite = $PowerUpAnimatedSprite
 onready var player = get_node("AnimationPlayer")
+onready var sceneManager = get_node('/root/SceneManager')
 
 # Camera
 onready var camera = $Camera2D
@@ -39,6 +40,10 @@ var bombLabel
 var scoreLabel
 var scoreText
 
+var timeout_credits = 2
+
+var music_player
+
 func set_level_cleared():
 	level_cleared = true
 
@@ -52,6 +57,10 @@ func get_portal_velocity():
 	
 func _ready():
 	add_to_group("Player")
+	
+	sceneManager.stop_audio()
+	
+	music_player = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player").get_node("AudioStreamPlayer")
 	
 	bombLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/BombLabel")
 	scoreLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreLabel")
@@ -68,6 +77,9 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(_delta):
+	if !music_player.is_playing():
+		music_player.play()
+	
 	var disable_movement = camera.is_boss_dead() and abs(get_position().x - 4800) < 5;
 	
 	if (disable_movement):
@@ -80,6 +92,11 @@ func _physics_process(_delta):
 				audioPlayer.play()
 			get_portal_velocity()
 			portal_velocity = move_and_slide(portal_velocity)
+		else:
+			timeout_credits -= _delta
+			if timeout_credits < 0:
+				#get_tree().change_scene("res://GodotCredits.tscn")
+				pass
 		return
 	
 	scoreLabel.set_position(Vector2(position.x - 30, position.y - 80))

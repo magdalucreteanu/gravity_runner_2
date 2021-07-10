@@ -10,6 +10,12 @@ var loadingPreInst = preload("res://gui/Loading.tscn")
 var next_resource
 var time_max = 100 # msec
 
+var audioPlayer
+var audio_stopped
+
+func stop_audio():
+	audio_stopped = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Other.modulate.a = 0
@@ -17,6 +23,8 @@ func _ready():
 	# Load up the first scene
 	currentScene = startScene.instance()
 	$Main/Viewport.add_child(currentScene)
+	audioPlayer = get_tree().get_root().get_node("SceneManager/AudioStreamPlayer")
+	audio_stopped = false
 	
 func pushScene(scene):
 	get_tree().get_root().get_node("SceneManager/Main/Viewport").set_disable_input(true)
@@ -59,6 +67,11 @@ func openWithLoading(path):
 	wait_frames = 0
 	
 func _process(delta):
+	if audio_stopped:
+		audioPlayer.stop()
+	elif !audioPlayer.is_playing():
+		audioPlayer.play()
+				
 	if (loader):
 		if wait_frames > 0: # wait for frames to let the "loading" animation to show up
 			wait_frames -= 1

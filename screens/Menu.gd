@@ -9,4 +9,6 @@ func _on_Settings_pressed():
 
 
 func _on_Play_pressed():
-	sceneManager.openWithLoading("res://Level_1.tscn")
+	var nextScene = load("res://screens/IntroStory.tscn") # Will load when parsing the script.
+	sceneManager.pushScene(nextScene.instance())
+	#sceneManager.openWithLoading("res://Level_1.tscn")
