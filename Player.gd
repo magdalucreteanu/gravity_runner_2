@@ -6,7 +6,7 @@ const JUMP_FORCE = 1000
 const GRAVITY = 50
 const MAX_FALL_SPEED = 1000
 
-const PORTAL_SPEED = 80
+const PORTAL_SPEED = 200
 var portal_velocity = Vector2()
 
 # Animation
@@ -64,7 +64,10 @@ func _physics_process(_delta):
 	var disable_movement = camera.is_boss_dead() and abs(get_position().x - 4800) < 5;
 	
 	if (disable_movement):
-		if (get_position().y > -200):
+		if (get_position().y > -100):
+			var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("PortalAudioStreamPlayer")
+			if !audioPlayer.is_playing():
+				audioPlayer.play()
 			get_portal_velocity()
 			portal_velocity = move_and_slide(portal_velocity)
 		return

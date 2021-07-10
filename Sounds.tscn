@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Sounds/sfx_sounds_powerup17.wav" type="AudioStream" id=1]
 [ext_resource path="res://Sounds/sfx_exp_medium3.wav" type="AudioStream" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Sounds/sfx_damage_hit10.wav" type="AudioStream" id=7]
 [ext_resource path="res://Sounds/sfx_exp_medium8.wav" type="AudioStream" id=8]
 [ext_resource path="res://Sounds/sfx_exp_long4.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/sfx_movement_portal6.wav" type="AudioStream" id=10]
 
 [node name="Sounds" type="Node2D"]
 
@@ -46,3 +47,6 @@ volume_db = 5.0
 
 [node name="EndExplosionAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+
+[node name="PortalAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
