@@ -1,6 +1,7 @@
 extends Camera2D
 
 var shaking = false
+var boss_dead = false
 
 var decay = 0.8  # How quickly the shaking stops [0, 1].
 
@@ -14,6 +15,8 @@ var player  # Assign the node this camera will follow.
 var trauma = 1.0  # Current shake strength.
 
 var trauma_power = 2  # Trauma exponent. Use [2, 3].
+
+var wait_start_end_music = 2
 
 func set_shaking(value):
 	shaking = value
@@ -36,6 +39,16 @@ func _process(delta):
 				audioPlayer.play()
 			trauma = max(trauma - decay * delta, 0)
 			shake()
+			boss_dead = true
+	if boss_dead:
+		var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player").get_node("AudioStreamPlayer")
+		audioPlayer.stop()
+		wait_start_end_music -= delta
+		if wait_start_end_music < 0:
+			var endGameAudioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player").get_node("EndGameAudioStreamPlayer")
+			if !endGameAudioPlayer.is_playing():
+				endGameAudioPlayer.play()
+
 
 func shake():
 	var amount = pow(trauma, trauma_power)

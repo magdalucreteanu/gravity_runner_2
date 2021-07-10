@@ -11,8 +11,6 @@ var shoot_timer = 0
 
 var lives = 20
 
-var level_cleared
-
 var rand
 
 onready var anim_player = get_node("AnimationPlayer")
@@ -21,12 +19,8 @@ onready var anim_player = get_node("AnimationPlayer")
 # var a = 2a
 # var b = "text"
 
-func level_cleared():
-	return level_cleared
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	level_cleared = false
 	rand = RandomNumberGenerator.new()
 	player = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player")
 	add_to_group("enemies")
@@ -45,7 +39,7 @@ func _process(delta: float) -> void:
 	if (!player_in_range()): #and lives == 50):
 		return
 	
-	level_cleared = true
+	player.set_level_cleared()
 	
 	shoot_timer -= delta
 	

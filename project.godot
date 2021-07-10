@@ -24,6 +24,10 @@ config/name="Gravity_Runner"
 run/main_scene="res://SceneManager.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1600
+
 [input]
 
 move_left={

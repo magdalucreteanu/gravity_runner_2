@@ -30,7 +30,13 @@ var blink_timer
 
 #var state_maschine
 
+var level_cleared = false
 
+func set_level_cleared():
+	level_cleared = true
+
+func get_level_cleared():
+	return level_cleared
 
 func _ready():
 	add_to_group("Player")
