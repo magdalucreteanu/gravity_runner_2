@@ -20,10 +20,11 @@ func _ready():
 
 
 func _on_Rocket_body_entered(body):
-	if !body.is_in_group("enemies"):
-		queue_free()
-
+	#if !body.is_in_group("enemies"):
+	#	queue_free()
+	pass
 
 func _on_EnemyRocketArea_body_entered(body):
-	if !body.is_in_group("enemies"):
-		queue_free()
+	#if !body.is_in_group("enemies"):
+	#	queue_free()
+	pass

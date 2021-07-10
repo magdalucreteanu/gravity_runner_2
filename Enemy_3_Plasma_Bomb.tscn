@@ -41,5 +41,6 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyPlasmaArea"]
 shape = SubResource( 3 )
+
 [connection signal="body_entered" from="." to="." method="_on_Enemy_3_Plasma_Bomb_body_entered"]
 [connection signal="body_entered" from="EnemyPlasmaArea" to="." method="_on_EnemyPlasmaArea_body_entered"]

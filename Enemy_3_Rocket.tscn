@@ -48,5 +48,6 @@ texture = ExtResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyRocketArea"]
 rotation = 1.5708
 shape = SubResource( 3 )
+
 [connection signal="body_entered" from="." to="." method="_on_Rocket_body_entered"]
 [connection signal="body_entered" from="EnemyRocketArea" to="." method="_on_EnemyRocketArea_body_entered"]

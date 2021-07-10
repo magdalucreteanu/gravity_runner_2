@@ -37,7 +37,7 @@ func player_in_range():
 	return abs(enemy_position - player_position) < 1000
 
 func _process(delta: float) -> void:
-	if (!player_in_range()):
+	if (!player_in_range() and lives == 50):
 		return
 	
 	shoot_timer -= delta
