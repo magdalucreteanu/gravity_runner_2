@@ -53,7 +53,7 @@ func _on_EnemyArea_body_entered(body):
 		queue_free()
 	if "PlatformUp" in body.name:
 		if !is_on_platform_up:
-			position.y -= 100
+			position.y -= 150
 			is_on_platform_up = true
 	if "Bullet" in body.name:
 		var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("DamageAudioStreamPlayer")
