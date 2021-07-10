@@ -22,8 +22,14 @@ func play_anim(anim_name):
 	if anim_player.is_playing() and anim_player.current_animation == anim_name:
 		return
 	anim_player.play(anim_name)
+	
+func player_in_range():
+	return false
 
 func _process(delta: float) -> void:
+	if (!player_in_range()):
+		return
+	
 	if Input.is_action_just_pressed("left_mouse_button"):
 		isAttacking = true
 		$Timer2.set_wait_time(1)
@@ -56,8 +62,8 @@ func fire_Enemy_3_Rocket():
 	Rocket_instance.apply_impulse(Vector2(),Vector2(Rocket_speed, 0).rotated(rotation))
 	Rocket2_instance.rotation_degrees = rotation_degrees
 	Rocket2_instance.apply_impulse(Vector2(),Vector2(Rocket_speed, 0).rotated(rotation))
-	get_tree().get_root().call_deferred("add_child", Rocket_instance)
-	get_tree().get_root().call_deferred("add_child", Rocket2_instance)
+	get_tree().get_root().get_node("SceneManager/Main/Viewport").call_deferred("add_child", Rocket_instance)
+	get_tree().get_root().get_node("SceneManager/Main/Viewport").call_deferred("add_child", Rocket2_instance)
 	
 func fire_Enemy_3_Plasma_Bomb():
 	var Plasma_instance = Plasma.instance()
@@ -66,8 +72,8 @@ func fire_Enemy_3_Plasma_Bomb():
 	Plasma2_instance.position = $PlasmaBombPoint2.get_global_position()
 	Plasma_instance.apply_impulse(Vector2(),Vector2(Plasma_speed, 0).rotated(rotation))
 	Plasma2_instance.apply_impulse(Vector2(),Vector2(Plasma_speed, 0).rotated(rotation))
-	get_tree().get_root().call_deferred("add_child", Plasma_instance)
-	get_tree().get_root().call_deferred("add_child", Plasma2_instance)
+	get_tree().get_root().get_node("SceneManager/Main/Viewport").call_deferred("add_child", Plasma_instance)
+	get_tree().get_root().get_node("SceneManager/Main/Viewport").call_deferred("add_child", Plasma2_instance)
 
 
 func _on_Timer_timeout():

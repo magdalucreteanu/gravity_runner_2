@@ -19,7 +19,7 @@ func _ready():
 	$Main/Viewport.add_child(currentScene)
 	
 func pushScene(scene):
-	get_tree().get_root().set_disable_input(true)
+	get_tree().get_root().get_node("SceneManager/Main/Viewport").set_disable_input(true)
 	$Main/Viewport.remove_child(currentScene)
 	$Other/Viewport.add_child(currentScene)
 	$Other.modulate.a = 1
@@ -29,7 +29,7 @@ func pushScene(scene):
 	$AnimationPlayer.play("nextScene")
 	
 func popScene(scene):
-	get_tree().get_root().set_disable_input(true)
+	get_tree().get_root().get_node("SceneManager/Main/Viewport").set_disable_input(true)
 	$Other.modulate.a = 0
 	$Main.modulate.a = 1
 	$Other/Viewport.add_child(scene)
@@ -44,7 +44,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$Main/Viewport.add_child(currentScene)
 	$Main.modulate.a = 1
 	$Other.modulate.a = 0
-	get_tree().get_root().set_disable_input(false)
+	get_tree().get_root().get_node("SceneManager/Main/Viewport").set_disable_input(false)
 		
 
 func openWithLoading(path):

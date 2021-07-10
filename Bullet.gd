@@ -26,7 +26,7 @@ onready var anim_player = $AnimationPlayer2
 var run_shoot_timer = 0
 
 func _ready():
-	_animated_sprite = get_tree().get_root().get_node("Level_1/Player").get_node("PlayerAnimatedSprite")
+	_animated_sprite = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player").get_node("PlayerAnimatedSprite")
 	GunSprite = get_node("GunHand")
 	
 
@@ -79,11 +79,11 @@ func _process(delta: float) -> void:
 ##			play_anim("Idle") 
 #			GunSprite.visible = false
 	
-	var bombLabel = get_tree().get_root().get_node("Level_1/BombLabel")
+	var bombLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/BombLabel")
 	reload_time_bomb -= delta
 	if reload_time_bomb < 0:
 		if (bombLabel.text == ""):
-			var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("BombReadyAudioStreamPlayer")
+			var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("BombReadyAudioStreamPlayer")
 			if !audioPlayer.is_playing():
 				audioPlayer.play()
 		bombLabel.set_text("BOMB READY!")
@@ -109,10 +109,10 @@ func fire_bullet():
 	bullet_instance.position = $BulletPoint.get_global_position()
 	bullet_instance.rotation_degrees = rotation_degrees
 	bullet_instance.apply_impulse(Vector2(),Vector2(bullet_speed, 0).rotated(rotation))
-	get_tree().get_root().call_deferred("add_child", bullet_instance)
+	get_tree().get_root().get_node("SceneManager/Main/Viewport").call_deferred("add_child", bullet_instance)
 	# Run Shoot animation
 	# Bullet Sound
-	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("BulletAudioStreamPlayer")
+	var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("BulletAudioStreamPlayer")
 	if !audioPlayer.is_playing():
 		audioPlayer.play()
 	
@@ -125,9 +125,9 @@ func fire_bomb():
 		bomb_instance.apply_impulse(Vector2(),Vector2(bomb_speed * distanceToMouse, 0).rotated(rotation))
 	else:
 		bomb_instance.apply_impulse(Vector2(),Vector2(max_bomb_speed, 0).rotated(rotation))
-	get_tree().get_root().call_deferred("add_child", bomb_instance)
+	get_tree().get_root().get_node("SceneManager/Main/Viewport").call_deferred("add_child", bomb_instance)
 	# Bomb Sound
-	var audioPlayer = get_tree().get_root().get_node("Level_1/Sounds").get_node("BombAudioStreamPlayer")
+	var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("BombAudioStreamPlayer")
 	if !audioPlayer.is_playing():
 		audioPlayer.play()
 

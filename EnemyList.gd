@@ -8,13 +8,13 @@ var respawn_time_enemies = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_tree().get_root().get_node("Level_1/Player")
+	player = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player")
 
 func generateGroundEnemies():
 	var rand = RandomNumberGenerator.new()
 	var max_enemies = rand.randf_range(3, 5)
 	var enemyScene = load("res://Enemy_1.tscn")
-	max_enemies = 0
+	#max_enemies = 0
 	for i in range(0, max_enemies):
 		var enemy = enemyScene.instance()
 		rand.randomize()
@@ -30,6 +30,7 @@ func generateFlyingEnemies():
 	var rand = RandomNumberGenerator.new()
 	var max_enemies = 3
 	var enemyScene2 = load("res://Enemy_2.tscn")
+	#max_enemies = 0
 	for i in range(0, max_enemies):
 		var enemy2 = enemyScene2.instance()
 		rand.randomize()

@@ -142,4 +142,4 @@ position = Vector2( 2300, 60 )
 collision_mask = 2
 
 [node name="Enemy_3" parent="." instance=ExtResource( 8 )]
-position = Vector2( 904.623, 256.645 )
+position = Vector2( 4800, 210 )
