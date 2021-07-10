@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const MOVE_SPEED = 100
 
-var lives = 1
+var lives = 2
 var is_hit_by_bomb = false;
 var y_velo = 0
 var facing_right = true

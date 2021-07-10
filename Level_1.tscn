@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/0.png" type="Texture" id=2]
@@ -6,7 +6,10 @@
 [ext_resource path="res://Sounds.tscn" type="PackedScene" id=4]
 [ext_resource path="res://EnemyList.gd" type="Script" id=5]
 [ext_resource path="res://PowerUp.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/tractor_beam/01.png" type="Texture" id=7]
 [ext_resource path="res://Enemy_3.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sprites/tractor_beam/02.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/tractor_beam/00.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 807.731, 61.2083 )
@@ -16,6 +19,14 @@ extents = Vector2( 521.945, 58.486 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 45.2865, 243.261 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 7 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Level_1" type="Node2D"]
 
@@ -143,3 +154,6 @@ collision_mask = 2
 
 [node name="Enemy_3" parent="." instance=ExtResource( 8 )]
 position = Vector2( 4800, 220 )
+
+[node name="PortalAnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )

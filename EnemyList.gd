@@ -14,7 +14,7 @@ func _ready():
 	enemy3 = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Enemy_3")
 
 func generateGroundEnemies():
-	if enemy3 and enemy3.level_cleared():
+	if enemy3 == null or enemy3.level_cleared():
 		return
 		
 	var rand = RandomNumberGenerator.new()
@@ -24,16 +24,16 @@ func generateGroundEnemies():
 	for i in range(0, max_enemies):
 		var enemy = enemyScene.instance()
 		rand.randomize()
-		var x = rand.randf_range(300, 800)
+		var x = rand.randi_range(300, 800)
 		rand.randomize()
-		var y = rand.randf_range(20, 200)
+		var y = rand.randi_range(20, 200)
 		enemy.position.x = player.position.x + x * (i+1)
 		enemy.position.y = y
 		enemy.set_name('Enemy_'+str(x)+'_'+str(y))
 		add_child(enemy)
 		
 func generateFlyingEnemies():
-	if enemy3 and enemy3.level_cleared():
+	if enemy3 == null or enemy3.level_cleared():
 		return
 		
 	var rand = RandomNumberGenerator.new()
@@ -43,9 +43,9 @@ func generateFlyingEnemies():
 	for i in range(0, max_enemies):
 		var enemy2 = enemyScene2.instance()
 		rand.randomize()
-		var x = rand.randf_range(300, 800)
+		var x = rand.randi_range(300, 800)
 		rand.randomize()
-		var y = rand.randf_range(70, 110)
+		var y = rand.randi_range(70, 110)
 		enemy2.position.x = player.position.x + x * (i+1)
 		enemy2.position.y = y
 		enemy2.set_name('Enemy_2_'+str(x)+'_'+str(y))
