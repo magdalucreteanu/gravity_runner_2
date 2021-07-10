@@ -5,7 +5,13 @@ const Plasma = preload("res://Enemy_3_Plasma_Bomb.tscn")
 const Rocket_speed = -500
 const Plasma_speed = -250
 
-var isAttacking = false
+var player
+
+var shoot_timer = 0
+
+var lives = 50
+
+var rand
 
 onready var anim_player = get_node("AnimationPlayer")
 
@@ -16,6 +22,8 @@ onready var anim_player = get_node("AnimationPlayer")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rand = RandomNumberGenerator.new()
+	player = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Player")
 	add_to_group("enemies")
 	
 func play_anim(anim_name):
@@ -24,34 +32,40 @@ func play_anim(anim_name):
 	anim_player.play(anim_name)
 	
 func player_in_range():
-	return false
+	var enemy_position = get_position().x
+	var player_position = player.get_position().x
+	return abs(enemy_position - player_position) < 1000
 
 func _process(delta: float) -> void:
 	if (!player_in_range()):
 		return
 	
-	if Input.is_action_just_pressed("left_mouse_button"):
-		isAttacking = true
+	shoot_timer -= delta
+	
+	if (shoot_timer >= 0):
+		return
+	
+	shoot_timer = 2
+	
+	var action = rand.randi_range(1, 2)
+	
+	if (action == 1):
+		# shoot bullets
 		$Timer2.set_wait_time(1)
 		$Timer2.start()
 		play_anim("Trigger")
 		yield($AnimationPlayer, "animation_finished")
 		play_anim("Fire Rocket")
 		yield($AnimationPlayer, "animation_finished")
-		isAttacking = false
-		
-	if Input.is_action_just_pressed("right_mouse_button"):
-		isAttacking = true
+	else:
+		# shoot bombs
 		$Timer.set_wait_time(1.25)
 		$Timer.start()
 		play_anim("Trigger")
 		yield($AnimationPlayer, "animation_finished")
 		play_anim("Fire Bomb")
 		yield($AnimationPlayer, "animation_finished")
-		isAttacking = false
-		
-	elif isAttacking == false:
-		play_anim("Idle")
+
 
 func fire_Enemy_3_Rocket():
 	var Rocket_instance = Rocket.instance()
@@ -84,4 +98,15 @@ func _on_Timer2_timeout():
 	fire_Enemy_3_Rocket()
 
 
-
+func _on_EnemyArea_body_entered(body):
+	if "Bullet" in body.name:
+		var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("DamageAudioStreamPlayer")
+		if !audioPlayer.is_playing():
+			audioPlayer.play()
+		lives -= 1
+		var scoreText = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreText")
+		var score = int(scoreText.get_text())
+		score += 1
+		scoreText.set_text(str(score))
+		if (lives == 0):
+			queue_free()

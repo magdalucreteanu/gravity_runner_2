@@ -36,8 +36,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_mouse_button") and isAttacking == false:
 		$Timer.set_wait_time(1)
 		$Timer.start()
-		reload_time_bullet = 0.3
-		run_shoot_timer = 0.5
+		reload_time_bullet = 0.2
+		run_shoot_timer = 0.3
 		GunSprite.visible = true
 		do_my_animation_sequence()
 		fire_bullet()
