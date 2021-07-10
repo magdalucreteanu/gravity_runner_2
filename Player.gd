@@ -35,6 +35,10 @@ var blink_timer
 
 var level_cleared = false
 
+var bombLabel
+var scoreLabel
+var scoreText
+
 func set_level_cleared():
 	level_cleared = true
 
@@ -49,6 +53,9 @@ func get_portal_velocity():
 func _ready():
 	add_to_group("Player")
 	
+	bombLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/BombLabel")
+	scoreLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreLabel")
+	scoreText = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreText")
 	
 	_powerup_animated_sprite.visible = false
 	
@@ -64,6 +71,9 @@ func _physics_process(_delta):
 	var disable_movement = camera.is_boss_dead() and abs(get_position().x - 4800) < 5;
 	
 	if (disable_movement):
+		scoreLabel.set_visible(false)
+		scoreText.set_visible(false)
+		bombLabel.set_visible(false)
 		if (get_position().y > -100):
 			var audioPlayer = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/Sounds").get_node("PortalAudioStreamPlayer")
 			if !audioPlayer.is_playing():
@@ -72,16 +82,9 @@ func _physics_process(_delta):
 			portal_velocity = move_and_slide(portal_velocity)
 		return
 	
-	#var viewportInfo : Rect2 = get_viewport().get_visible_rect()
-	var scoreLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreLabel")
-	var scoreText = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/ScoreText")
-	#var visible_rect_position = get_viewport().get_visible_rect().position
-	#scoreLabel.set_position(Vector2(camera.limit_left + 30, camera.limit_top + 80))
-	#scoreText.set_position(Vector2(camera.limit_left + 80, camera.limit_top + 80))	
 	scoreLabel.set_position(Vector2(position.x - 30, position.y - 80))
 	scoreText.set_position(Vector2(position.x + 20, position.y - 80))
 	
-	var bombLabel = get_tree().get_root().get_node("SceneManager/Main/Viewport").get_node("Level_1/BombLabel")
 	bombLabel.set_position(Vector2(position.x - 30, position.y - 100))
 	
 	var run_shoot_timer = get_node("BulletKinematicBody2D").get("run_shoot_timer")
