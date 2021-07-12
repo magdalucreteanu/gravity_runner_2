@@ -2,12 +2,12 @@ extends Control
 
 onready var sceneManager = get_node('/root/SceneManager')
 
-const section_time := 2.0
-const line_time := 0.3
-const base_speed := 100
-#const section_time := 3
-#const line_time := 2
-#const base_speed := 20
+#const section_time := 2.0
+#const line_time := 0.3
+#const base_speed := 100
+const section_time := 3
+const line_time := 1.5
+const base_speed := 30
 const speed_up_multiplier := 10.0
 const title_color := Color.darkorchid
 
@@ -63,25 +63,24 @@ var credits_original = [
 
 var credits = [
 	[
-		"Our city is under attack!",
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-		"Curabitur id suscipit massa, quis tincidunt tellus.",
-		"Fusce gravida a lectus lacinia finibus."
+		"Our world is under attack!",
+		"An asteroid heading towards Earth created electromagnetic",
+		"impulses that interfered with all the AI controlled machines,",
+		"making them aggressive and destructive. In order to destroy",
+		"the asteroid before it hits our planet we need to survive",
+		"the robots and activate four portals placed in different cities."
 	],[
 		"We must act!",
-		"Curabitur pharetra massa vitae orci aliquet, sed ultrices risus commodo.",
-		"Suspendisse sit amet urna dui."
+		"Our scientists managed to reboot one of the robots and",
+		"sent it on a mission to activate the portals.",
 	],[
-		"Join us!"
+		"This is our last hope as the human race!"
 	],[
 		"We love cats!"
 	]
 ]
 
 func _process(delta):
-	print(lines.size())
-	print(started)
-	
 	var scroll_speed = base_speed * delta
 	
 	if section_next:
